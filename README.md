@@ -147,3 +147,42 @@ This API was created to practice and showcase:
 - Secure authentication patterns
 - Modular, scalable backend design
 - Integration of modern web dev concepts (real-time, AI, caching)
+
+## Project Structure
+
+🛡 NestJS (API)
+Structure (Domain-Driven):
+
+```vbnet
+src/
+├── modules/                ← top-level feature modules
+│   ├── users/
+│   │   ├── controllers/
+│   │   ├── services/
+│   │   ├── repositories/
+│   │   ├── dtos/
+│   │   └── entities/
+│   ├── auth/         same structure...
+│   └── products/
+├── common/                ← shared abstractions
+│   ├── decorators/
+│   ├── guards/
+│   ├── interceptors/
+│   ├── filters/
+│   ├── interfaces/       ← e.g. repositories & service contracts
+│   └── pipes/
+├── config/                ← environment & app configs
+│   └── app.config.ts
+├── database/              ← TypeORM/migrations/entities
+├── shared/                ← shared modules (e.g. mail, logging)
+├── main.ts
+└── app.module.ts
+```
+
+Reasons & Best Practices:
+
+- Feature folders bundle controllers, services, DTOs, entities, and repos together.
+- Common module houses reusable guards, pipes, filters, interceptors, abiding by SOLID and interface-driven design .
+- Repository pattern with interfaces and custom implementations keeps code testable and modular .
+- DTOs manage validation and data flow, ensuring clean layer separation.
+- Modules act like Angular modules—NestJS is architecturally similar.
