@@ -6,14 +6,14 @@ import { User } from '../models/user.entity';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly dataSource: DataSource) {}
+  constructor(private readonly _dataSource: DataSource) {}
 
   /**
    * Find all users
    * @returns Promise<User[]>
    */
   async findAll(): Promise<User[]> {
-    return await this.dataSource.getRepository(User).find();
+    return await this._dataSource.getRepository(User).find();
   }
 
   /**
@@ -22,7 +22,7 @@ export class UsersService {
    * @returns Promise<User | null>
    */
   async findOne(id: number): Promise<User | null> {
-    return await this.dataSource.getRepository(User).findOneBy({ id });
+    return await this._dataSource.getRepository(User).findOneBy({ id });
   }
 
   /**
@@ -31,7 +31,7 @@ export class UsersService {
    * @returns Promise<User>
    */
   async create(user: User): Promise<User> {
-    return await this.dataSource.getRepository(User).save(user);
+    return await this._dataSource.getRepository(User).save(user);
   }
 
   /**
@@ -41,7 +41,7 @@ export class UsersService {
    * @returns Promise<User | null>
    */
   async update(id: number, user: User): Promise<User | null> {
-    const repository = this.dataSource.getRepository(User);
+    const repository = this._dataSource.getRepository(User);
     const result = await repository.update(id, user);
 
     if (result.affected === 0) {
@@ -57,6 +57,6 @@ export class UsersService {
    * @returns Promise<void>
    */
   async delete(id: number): Promise<void> {
-    await this.dataSource.getRepository(User).delete(id);
+    await this._dataSource.getRepository(User).delete(id);
   }
 }
