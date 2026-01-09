@@ -23,6 +23,7 @@ import { UsersModule } from './modules/users/users.module';
         database: configService.get('DB_NAME'),
         entities: [UserSchema],
         synchronize: true, // cannot be used in production
+        ssl: configService.get('DB_SSL_ACTIVE') || false,
       }),
     }),
     UsersModule,
