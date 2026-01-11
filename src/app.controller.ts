@@ -4,6 +4,6 @@ import { Controller, Get } from '@nestjs/common';
 export class AppController {
   @Get()
   getInformation(): string {
-    return 'Icecube API v1.0.0';
+    return 'Welcome to the Icecube API v1.0.0';
   }
 }

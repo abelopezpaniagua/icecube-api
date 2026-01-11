@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
-
 import { DataSource } from 'typeorm';
-
 import { User } from '../models/user.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -26,12 +25,27 @@ export class UsersService {
   }
 
   /**
+   * Find one user by username
+   * @param username - User username
+   * @returns Promise<User | null>
+   */
+  async findByUsername(username: string): Promise<User | null> {
+    return await this._dataSource.getRepository(User).findOneBy({ username });
+  }
+
+  /**
    * Create a new user
    * @param user - User object
    * @returns Promise<User>
    */
   async create(user: User): Promise<User> {
-    return await this._dataSource.getRepository(User).save(user);
+    const saltOrRounds = 10;
+    const newUser: User = {
+      ...user,
+      password: await bcrypt.hash(user.password, saltOrRounds),
+    };
+
+    return await this._dataSource.getRepository(User).save(newUser);
   }
 
   /**
