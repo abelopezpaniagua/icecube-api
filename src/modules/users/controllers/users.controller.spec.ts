@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersController } from './users.controller';
 import { UsersService } from '../services/users.service';
+import { AuthGuard, MockJwtAuthGuard } from '@modules/auth/auth.guard';
 
 describe('UsersController', () => {
   let controller: UsersController;
@@ -23,7 +24,10 @@ describe('UsersController', () => {
           useValue: serviceMock,
         },
       ],
-    }).compile();
+    })
+      .overrideGuard(AuthGuard)
+      .useClass(MockJwtAuthGuard)
+      .compile();
 
     controller = module.get<UsersController>(UsersController);
   });
