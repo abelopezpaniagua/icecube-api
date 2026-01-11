@@ -39,3 +39,11 @@ export class AuthGuard implements CanActivate {
     return type === 'Bearer' ? token : undefined;
   }
 }
+
+export class MockJwtAuthGuard implements CanActivate {
+  canActivate(context: ExecutionContext) {
+    const request: Request = context.switchToHttp().getRequest();
+    request['user'] = { id: 1, username: 'test' };
+    return true;
+  }
+}

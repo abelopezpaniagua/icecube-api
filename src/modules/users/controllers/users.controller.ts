@@ -16,7 +16,7 @@ import { Response } from 'express';
 
 import { User } from '../models/user.entity';
 import { UsersService } from '../services/users.service';
-import { AuthGuard } from 'src/modules/auth/auth.guard';
+import { AuthGuard } from '@modules/auth/auth.guard';
 
 @Controller('users')
 @UseGuards(AuthGuard)

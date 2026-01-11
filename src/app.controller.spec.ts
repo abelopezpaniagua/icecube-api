@@ -13,8 +13,10 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Icecube API v1.0.0"', () => {
-      expect(appController.getInformation()).toBe('Icecube API v1.0.0');
+    it('should return "Welcome to the Icecube API v1.0.0"', () => {
+      expect(appController.getInformation()).toBe(
+        'Welcome to the Icecube API v1.0.0',
+      );
     });
   });
 });
